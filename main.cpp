@@ -1,10 +1,8 @@
 struct plateau
 {
-    char table[3][3] = {'1', '2', '3', '4', '5', '6', '7', '8', '9'};
+    int table[3][3] = {1, 2, 3, 4, 5, 6, 7, 8, 9};
 };
 
-//------------------------------------------------------------
-// Déclaration du type type_code_partie
 enum type_code_partie
 {
     non_finie,
@@ -13,21 +11,15 @@ enum type_code_partie
     match_nul
 };
 
-//------------------------------------------------------------
-// Procédure affichant les règles
-//A FAIRE
 void afficher_regles()
 {
     cout << "========== Morpion ===========" << endl;
 
-    cout << "Chaque joueur a donc son propre symbole, généralement une croix pour l’un et un rond pour l’autre.";
+    cout << "Chaque joueur a donc son propre symbole, généralement une croix (1) pour l’un et un rond(2) pour l’autre.";
     cout << "La partie se termine quand l’un des joueurs à aligner 3 symboles ou quand la grille est complétée sans vainqueur. Il y a alors égalité.";
 
 }
 
-//------------------------------------------------------------
-// Procédure initialisant le plateau
-// A FAIRE
 void initialiser_plateau( plateau * p )
 {
     for(int i = 0; i < 3; i++){
@@ -38,9 +30,6 @@ void initialiser_plateau( plateau * p )
         }
 }
 
-//------------------------------------------------------------
-// Procédure faisant jouer un coup au joueur j
-// A FAIRE
 void faire_jouer_un_coup( int joueur, plateau * p )
 {
      int case;
@@ -78,9 +67,7 @@ case 9:
     break;
 }
 }
-//------------------------------------------------------------
-// Procédure affichant le plateau
-// A FAIRE
+
 void afficher_plateau( plateau p )
 {
     for(int i = 0; i < 3; i++){
@@ -91,39 +78,37 @@ void afficher_plateau( plateau p )
 }
 }
 
-//------------------------------------------------------------
-// Procédure affichant le gagnant
-// A FAIRE
+
 void afficher_gagnant( plateau p )
 {
-
+ if( code_partie() == joueur_1_gagnant)
+    cout << "joueur 1 gagnant !" << endl;
+ else if (code_partie() == joueur_2_gagnant)
+    cout << "joueur 2 gagnant !" << endl;
+ else
+    cout << "match nul !" << endl;
 }
 
-//------------------------------------------------------------
-// Fonction retournant :
-//      non_finie : si la partie n'est pas terminée
-//      joueur_1_gagnant : si le joueur 1 a gagné
-//      joueur_2_gagnant : si le joueur 2 a gagné
-//      match_nul : s'il y a match nul
+
 type_code_partie code_partie( plateau p )
 {
     type_code_partie statement = non_finie;
 
-    if((p[0][0] = 1 && ((p[0][1] = 1 && p[0][2] = 1) || (p[0][1] = 1 && p[0][2] = 1) || (p[1][1] = 1 && p[2][2] = 1)) ||
-        p[0][2] = 1 && ((p[1][2] = 1 && p[2][2] = 1) || (p[1][1] = 1 && p[2][0] = 1)) ||
-        p[2][1] = 1 && ((p[2][0] = 1 && p[2][2] = 1) || (p[1][1] = 1 && p[0][1] = 1)) ||
-        p[1][0] = 1 && p[1][1] = 1 && p[1][2] = 1) {
+    if((p[0][0] == 1 && ((p[0][1] == 1 && p[0][2] == 1) || (p[0][1] == 1 && p[0][2] == 1) || (p[1][1] == 1 && p[2][2] == 1)) ||
+        p[0][2] == 1 && ((p[1][2] == 1 && p[2][2] == 1) || (p[1][1] == 1 && p[2][0] == 1)) ||
+        p[2][1] == 1 && ((p[2][0] == 1 && p[2][2] == 1) || (p[1][1] == 1 && p[0][1] == 1)) ||
+        p[1][0] == 1 && p[1][1] = 1 && p[1][2] = 1) {
             statement = joueur_1_gagnant;
     }
-    else if((p[0][0] = 2 && ((p[0][1] = 2 && p[0][2] = 2) || (p[0][1] = 2 && p[0][2] = 2) || (p[1][1] = 2 && p[2][2] = 2)) ||
-        p[0][2] = 2 && ((p[1][2] = 2 && p[2][2] = 2) || (p[1][1] = 2 && p[2][0] = 2)) ||
-        p[2][1] = 2 && ((p[2][0] = 2 && p[2][2] = 2) || (p[1][1] = 2 && p[0][1] = 2)) ||
-        p[1][0] = 2 && p[1][1] = 2 && p[1][2] = 2) {
+    else if((p[0][0] == 2 && ((p[0][1] == 2 && p[0][2] == 2) || (p[0][1] == 2 && p[0][2] == 2) || (p[1][1] == 2 && p[2][2] == 2)) ||
+        p[0][2] == 2 && ((p[1][2] == 2 && p[2][2] == 2) || (p[1][1] == 2 && p[2][0] == 2)) ||
+        p[2][1] == 2 && ((p[2][0] == 2 && p[2][2] == 2) || (p[1][1] == 2 && p[0][1] == 2)) ||
+        p[1][0] == 2 && p[1][1] == 2 && p[1][2] == 2) {
             statement = joueur_2_gagnant;
     }
     else if (for(int i = 0; i < 3; i++){
         for(int j = 0; j < 3; j++){
-            p[i][j] = 1 || 2;
+            p[i][j] == 1 || 2;
         }}){
             statement = match_nul;
         }
@@ -134,8 +119,7 @@ type_code_partie code_partie( plateau p )
     return statement;
 }
 
-//------------------------------------------------------------
-// Procédure générale du jeu
+
 void jeu()
 {
     // déclaration des variables
@@ -168,12 +152,10 @@ void jeu()
     afficher_gagnant(p1);
 }
 
-//------------------------------------------------------------
-// Fonction principale de l'application
+
 int main()
 {
     jeu();
 
     return 0;
 }
-
