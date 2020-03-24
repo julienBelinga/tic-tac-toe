@@ -30,6 +30,12 @@ void afficher_regles()
 // A FAIRE
 void initialiser_plateau( plateau * p )
 {
+    for(int i = 0; i < 3; i++){
+        for(int j = 0; j < 3; j++){
+            p[i][j] = 0;
+        }
+        cout << "plateau initialiser" << endl;
+        }
 }
 
 //------------------------------------------------------------
@@ -37,38 +43,38 @@ void initialiser_plateau( plateau * p )
 // A FAIRE
 void faire_jouer_un_coup( int joueur, plateau * p )
 {
-     char a;
+     int case;
 
     cout << "Veuillez selectionner une case: ";
-    cin >> a;
+    cin >> case;
 
-    switch{
+    switch(case){
 case 1:
-    table[0][0] = joueur;
+    p[0][0] = joueur;
     break;
 case 2:
-    table[0][1] = joueur;
+    p[0][1] = joueur;
     break;
 case 3:
-    table[0][2] = joueur;
+    p[0][2] = joueur;
     break;
 case 4:
-    table[1][0] = joueur;
+    p[1][0] = joueur;
     break;
 case 5:
-    table[1][1] = joueur;
+    p[1][1] = joueur;
     break;
 case 6:
-    table[1][2] = joueur;
+    p[1][2] = joueur;
     break;
 case 7:
-    table[2][0] = joueur;
+    p[2][0] = joueur;
     break;
 case 8:
-    table[2][1] = joueur;
+    p[2][1] = joueur;
     break;
 case 9:
-    table[2][2] = joueur;
+    p[2][2] = joueur;
     break;
 }
 }
@@ -79,7 +85,7 @@ void afficher_plateau( plateau p )
 {
     for(int i = 0; i < 3; i++){
         for(int j = 0; j < 3; j++){
-            cout << table[i][j] << "";
+            cout << p[i][j] << "";
         }
         cout << endl;
 }
@@ -101,9 +107,31 @@ void afficher_gagnant( plateau p )
 //      match_nul : s'il y a match nul
 type_code_partie code_partie( plateau p )
 {
-    // A FAIRE
+    type_code_partie statement = non_finie;
 
-    return non_finie; // pour l'instant
+    if((p[0][0] = 1 && ((p[0][1] = 1 && p[0][2] = 1) || (p[0][1] = 1 && p[0][2] = 1) || (p[1][1] = 1 && p[2][2] = 1)) ||
+        p[0][2] = 1 && ((p[1][2] = 1 && p[2][2] = 1) || (p[1][1] = 1 && p[2][0] = 1)) ||
+        p[2][1] = 1 && ((p[2][0] = 1 && p[2][2] = 1) || (p[1][1] = 1 && p[0][1] = 1)) ||
+        p[1][0] = 1 && p[1][1] = 1 && p[1][2] = 1) {
+            statement = joueur_1_gagnant;
+    }
+    else if((p[0][0] = 2 && ((p[0][1] = 2 && p[0][2] = 2) || (p[0][1] = 2 && p[0][2] = 2) || (p[1][1] = 2 && p[2][2] = 2)) ||
+        p[0][2] = 2 && ((p[1][2] = 2 && p[2][2] = 2) || (p[1][1] = 2 && p[2][0] = 2)) ||
+        p[2][1] = 2 && ((p[2][0] = 2 && p[2][2] = 2) || (p[1][1] = 2 && p[0][1] = 2)) ||
+        p[1][0] = 2 && p[1][1] = 2 && p[1][2] = 2) {
+            statement = joueur_2_gagnant;
+    }
+    else if (for(int i = 0; i < 3; i++){
+        for(int j = 0; j < 3; j++){
+            p[i][j] = 1 || 2;
+        }}){
+            statement = match_nul;
+        }
+        else{
+            statement = non_finie;
+        }
+
+    return statement;
 }
 
 //------------------------------------------------------------
