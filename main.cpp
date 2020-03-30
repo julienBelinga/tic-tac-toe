@@ -4,7 +4,7 @@ using namespace std ;
 
 struct plateau
 {
-    int table[3][3] = {1, 2, 3, 4, 5, 6, 7, 8, 9};
+    int table[3][3] = {1,2,3,4,5,6,7,8,9};
 };
 
 enum type_code_partie
@@ -28,7 +28,7 @@ void initialiser_plateau( plateau * p )
 {
     for(int i = 0; i < 3; i++){
         for(int j = 0; j < 3; j++){
-            p[i][j] = 0;
+            p.table[i][j] = 0;
         }
         cout << "plateau initialiser" << endl;
         }
@@ -36,39 +36,29 @@ void initialiser_plateau( plateau * p )
 
 void faire_jouer_un_coup( int joueur, plateau * p )
 {
-     int case;
+     int a;
 
     cout << "Veuillez selectionner une case: ";
-    cin >> case;
+    cin >> a;
 
-    switch(case){
-case 1:
-    p[0][0] = joueur;
-    break;
-case 2:
-    p[0][1] = joueur;
-    break;
-case 3:
-    p[0][2] = joueur;
-    break;
-case 4:
-    p[1][0] = joueur;
-    break;
-case 5:
-    p[1][1] = joueur;
-    break;
-case 6:
-    p[1][2] = joueur;
-    break;
-case 7:
-    p[2][0] = joueur;
-    break;
-case 8:
-    p[2][1] = joueur;
-    break;
-case 9:
-    p[2][2] = joueur;
-    break;
+    if (a == 1)
+        p.table[0][0] = joueur;
+    else if (a == 2)
+        p.table[0][1] = joueur;
+    else if (a == 3)
+        p.table[0][2] = joueur;
+    else if (a == 4)
+        p.table[1][0] = joueur;
+    else if (a == 5)
+        p.table[1][1] = joueur;
+    else if (a == 6)
+        p.table[1][2] = joueur;
+    else if (a == 7)
+        p.table[2][0] = joueur;
+    else if (a == 8)
+        p.table[2][1] = joueur;
+    else if (a == 9)
+        p.table[2][2] = joueur;
 }
 }
 
@@ -76,7 +66,7 @@ void afficher_plateau( plateau p )
 {
     for(int i = 0; i < 3; i++){
         for(int j = 0; j < 3; j++){
-            cout << p[i][j] << "";
+            cout << p.table[i][j] << "";
         }
         cout << endl;
 }
@@ -98,21 +88,45 @@ type_code_partie code_partie( plateau p )
 {
     type_code_partie statement = non_finie;
 
-    if((p[0][0] == 1 && ((p[0][1] == 1 && p[0][2] == 1) || (p[0][1] == 1 && p[0][2] == 1) || (p[1][1] == 1 && p[2][2] == 1)) ||
-        p[0][2] == 1 && ((p[1][2] == 1 && p[2][2] == 1) || (p[1][1] == 1 && p[2][0] == 1)) ||
-        p[2][1] == 1 && ((p[2][0] == 1 && p[2][2] == 1) || (p[1][1] == 1 && p[0][1] == 1)) ||
-        p[1][0] == 1 && p[1][1] = 1 && p[1][2] = 1) {
-            statement = joueur_1_gagnant;
-    }
-    else if((p[0][0] == 2 && ((p[0][1] == 2 && p[0][2] == 2) || (p[0][1] == 2 && p[0][2] == 2) || (p[1][1] == 2 && p[2][2] == 2)) ||
-        p[0][2] == 2 && ((p[1][2] == 2 && p[2][2] == 2) || (p[1][1] == 2 && p[2][0] == 2)) ||
-        p[2][1] == 2 && ((p[2][0] == 2 && p[2][2] == 2) || (p[1][1] == 2 && p[0][1] == 2)) ||
-        p[1][0] == 2 && p[1][1] == 2 && p[1][2] == 2) {
-            statement = joueur_2_gagnant;
-    }
+    //1er joueur
+    if (p.table[0][0] == 1 && p.table[0][1] == 1 && p.table[0][2] == 1)
+        statement = joueur_1_gagnant;
+    if (p.table[1][0] == 1 && p.table[1][1] == 1 && p.table[1][2] == 1)
+        statement = joueur_1_gagnant;
+    if (p.table[2][0] == 1 && p.table[2][1] == 1 && p.table[2][2] == 1)
+        statement = joueur_1_gagnant;
+    if (p.table[0][0] == 1 && p.table[1][0] == 1 && p.table[2][0] == 1)
+        statement = joueur_1_gagnant;
+    if (p.table[0][1] == 1 && p.table[1][1] == 1 && p.table[2][1] == 1)
+        statement = joueur_1_gagnant;
+    if (p.table[0][2] == 1 && p.table[1][2] == 1 && p.table[2][2] == 1)
+        statement = joueur_1_gagnant;
+    if (p.table[0][0] == 1 && p.table[1][1] == 1 && p.table[2][2] == 1)
+        statement = joueur_1_gagnant;
+    if (p.table[2][0] == 1 && p.table[1][1] == 1 && p.table[0][2] == 1)
+        statement = joueur_1_gagnant;
+
+    //2nd joueur
+    if (p.table[0][0] == 2 && p.table[0][1] == 2 && p.table[0][2] == 2)
+        statement = joueur_2_gagnant;
+    if (p.table[1][0] == 2 && p.table[1][1] == 2 && p.table[1][2] == 2)
+        statement = joueur_2_gagnant;
+    if (p.table[2][0] == 2 && p.table[2][1] == 2 && p.table[2][2] == 2)
+        statement = joueur_2_gagnant;
+    if (p.table[0][0] == 2 && p.table[1][0] == 2 && p.table[2][0] == 2)
+        statement = joueur_2_gagnant;
+    if (p.table[0][1] == 2 && p.table[1][1] == 2 && p.table[2][1] == 2)
+        statement = joueur_2_gagnant;
+    if (p.table[0][2] == 2 && p.table[1][2] == 2 && p.table[2][2] == 2)
+        statement = joueur_2_gagnant;
+    if (p.table[0][0] == 2 && p.table[1][1] == 2 && p.table[2][2] == 2)
+        statement = joueur_2_gagnant;
+    if (p.table[2][0] == 2 && p.table[1][1] == 2 && p.table[0][2] == 2)
+        statement = joueur_2_gagnant;
+
     else if (for(int i = 0; i < 3; i++){
         for(int j = 0; j < 3; j++){
-            p[i][j] == 1 || 2;
+            p.table[i][j] == 1 || p.table[i][j] == 2;
         }}){
             statement = match_nul;
         }
